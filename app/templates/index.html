@@ -70,10 +70,7 @@
         <h2>Hobbies</h2>
         {% for hobby in hobbies %}
         <div class="hobby">
-          <img
-            src="{{ hobby.img.src }}"
-            alt="{{ hobby.img.alt }}"
-          />
+          <img src="{{ hobby.img.src }}" alt="{{ hobby.img.alt }}" />
           <div class="hobby-description">
             <div class="hobby-title">{{ hobby.title }}</div>
             <p>{{ hobby.one_liner }}</p>
