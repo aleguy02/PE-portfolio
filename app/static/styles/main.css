@@ -59,23 +59,15 @@ body {
 .profile {
   background-color: #1d539f !important;
   text-align: center;
-<<<<<<< HEAD
   height: 420px;
   margin-bottom: 50px;
   color: white;
-=======
-  height: 320px;
-  margin-bottom: 50px;
->>>>>>> main
 }
 
 .profile h1 {
   font-size: 50px;
   font-weight: 700;
-<<<<<<< HEAD
-=======
   color: white;
->>>>>>> main
 }
 
 .profile img {
@@ -115,4 +107,29 @@ body {
 #bio {
   padding-left: 1rem;
   padding-right: 1rem;
+}
+
+.experience-section {
+  margin-bottom: 3rem;
+}
+
+.position {
+  margin-bottom: 2rem;
+}
+
+.position-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.position-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  color: #666;
+}
+
+ul {
+  margin-top: 0.5rem;
+  padding-left: 1.2rem;
 }
