@@ -109,6 +109,11 @@ body {
   padding-right: 1rem;
 }
 
+.section > h2 {
+  color: #1d539f;
+}
+
+/* Work Experience */
 .experience-section {
   margin-bottom: 3rem;
 }
@@ -132,4 +137,40 @@ body {
 ul {
   margin-top: 0.5rem;
   padding-left: 1.2rem;
+}
+
+/* Hobbies */
+.hobbies-section {
+  margin-top: 3rem;
+}
+
+.hobby {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.hobby img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+}
+
+.hobby-description {
+  max-width: 600px;
+}
+
+.hobby-title {
+  font-weight: bold;
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+.hobby-description p {
+  margin: 0.25rem 0 0;
+  font-size: 0.95rem;
+  color: #555;
 }
