@@ -48,8 +48,8 @@
       </div>
     </div>
     <div class="about-section">
-      <h2>About Me</h2>
-      <section class="experience-section">
+      <section class="experience-section section">
+        <h2>Work Experience</h2>
         {% for item in work_experience %}
         <div class="position">
           <div class="position-title">{{ item.title }}</div>
@@ -59,11 +59,25 @@
           </div>
           <ul>
             {% for bullet in item.bullets %}
-            <li>
-              {{ bullet }}
-            </li>
+            <li>{{ bullet }}</li>
             {% endfor %}
           </ul>
+        </div>
+        {% endfor %}
+      </section>
+
+      <section class="hobbies-section section">
+        <h2>Hobbies</h2>
+        {% for hobby in hobbies %}
+        <div class="hobby">
+          <img
+            src="{{ hobby.img.src }}"
+            alt="{{ hobby.img.alt }}"
+          />
+          <div class="hobby-description">
+            <div class="hobby-title">{{ hobby.title }}</div>
+            <p>{{ hobby.one_liner }}</p>
+          </div>
         </div>
         {% endfor %}
       </section>
