@@ -44,6 +44,18 @@ def index():
             ],
         },
     ]
+
+    return render_template(
+        "index.html",
+        title="Alejandro Villate",
+        url=URL,
+        work_experience=work_experience,
+        mapboxgl_pub=MAPBOX_API_KEY,
+    )
+
+
+@app.route("/hobbies")
+def hobbies():
     hobbies = [
         {
             "img": {
@@ -71,11 +83,4 @@ def index():
         },
     ]
 
-    return render_template(
-        "index.html",
-        title="Alejandro Villate",
-        url=URL,
-        work_experience=work_experience,
-        hobbies=hobbies,
-        mapboxgl_pub=MAPBOX_API_KEY,
-    )
+    return render_template("hobbies.html", title="Hobbies", hobbies=hobbies)

@@ -51,16 +51,16 @@
           writing code. In my free time, I love staying up to date on the latest
           in tech and video games, taking care of my bonsai trees, using my art
           skills (either by drawing or making UIs), and cooking new recipes.
+          Check some of my hobbies
+          <a href="{{ url_for('hobbies') }}" class="hobbies-url">here!</a>
         </p>
       </div>
     </div>
+
     <div class="about-section">
-      {% include 'work_experience.html' %}
-
-      {% include 'education.html' %}
-
-      {% include 'hobbies.html' %}
+      {% include 'work_experience.html' %} {% include 'education.html' %}
     </div>
+
     <div class="section">
       <h2>Travel Map</h2>
       <p>I've had to opportunity to visit all the cool places on this map!</p>
