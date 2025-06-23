@@ -4,7 +4,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 app = Flask(__name__)
-url = os.getenv("URL")
+URL = os.getenv("URL")
+MAPBOX_API_KEY = os.getenv("MAPBOX_API_KEY")
 
 
 @app.route("/")
@@ -73,7 +74,8 @@ def index():
     return render_template(
         "index.html",
         title="Alejandro Villate",
-        url=url,
+        url=URL,
         work_experience=work_experience,
         hobbies=hobbies,
+        mapboxgl_pub=MAPBOX_API_KEY,
     )
