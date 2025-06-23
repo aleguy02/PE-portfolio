@@ -1,0 +1,17 @@
+<section class="experience-section section">
+  <h2>Work Experience</h2>
+  {% for item in work_experience %}
+  <div class="position">
+    <div class="position-title">{{ item.title }}</div>
+    <div class="position-meta">
+      <span>{{ item.meta.company }}</span>
+      <span>{{ item.meta.dates }}</span>
+    </div>
+    <ul>
+      {% for bullet in item.bullets %}
+      <li>{{ bullet }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
+</section>
