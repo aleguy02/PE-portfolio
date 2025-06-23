@@ -140,6 +140,11 @@ ul {
 }
 
 /* Hobbies */
+.hobbies-url:visited {
+  color: #ffffff !important;
+  text-decoration: underline;
+}
+
 .hobbies-section {
   margin-top: 3rem;
 }
