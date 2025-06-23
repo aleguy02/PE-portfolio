@@ -55,50 +55,11 @@
       </div>
     </div>
     <div class="about-section">
-      <section class="experience-section section">
-        <h2>Work Experience</h2>
-        {% for item in work_experience %}
-        <div class="position">
-          <div class="position-title">{{ item.title }}</div>
-          <div class="position-meta">
-            <span>{{ item.meta.company }}</span>
-            <span>{{ item.meta.dates }}</span>
-          </div>
-          <ul>
-            {% for bullet in item.bullets %}
-            <li>{{ bullet }}</li>
-            {% endfor %}
-          </ul>
-        </div>
-        {% endfor %}
-      </section>
+      {% include 'work_experience.html' %}
 
-      <section class="education-section section">
-        <h2>Education</h2>
-        <div class="position">
-          <div class="position-title">University of Florida</div>
-          <div class="position-meta">
-            <span
-              >Bachelor of Science in Computer Science
-              <span>(GPA - 3.79)</span></span
-            >
-            <span>Aug. 2022 – Jun. 2026</span>
-          </div>
-        </div>
-      </section>
+      {% include 'education.html' %}
 
-      <section class="hobbies-section section">
-        <h2>Hobbies</h2>
-        {% for hobby in hobbies %}
-        <div class="hobby">
-          <img src="{{ hobby.img.src }}" alt="{{ hobby.img.alt }}" />
-          <div class="hobby-description">
-            <div class="hobby-title">{{ hobby.title }}</div>
-            <p>{{ hobby.one_liner }}</p>
-          </div>
-        </div>
-        {% endfor %}
-      </section>
+      {% include 'hobbies.html' %}
     </div>
     <div class="section">
       <h2>Travel Map</h2>
