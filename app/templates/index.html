@@ -53,15 +53,14 @@
       {% include 'work_experience.html' %} {% include 'education.html' %}
     </div>
 
-    <div class="section">
+    <div class="map-section section">
       <h2>Travel Map</h2>
-      <p>I've had to opportunity to visit all the cool places on this map!</p>
-      <div id="map" style="width: 400px; height: 300px"></div>
+      <p class="responsive-text-lg">I've had the opportunity to visit all the cool places on this map!</p>
+      <p class="responsive-text-sm">View this page on a larger screen to see this map</p>
+      <div id="map"></div>
     </div>
     <script>
       mapboxgl.accessToken = '{{ mapboxgl_pub }}';
-      console.log(mapboxgl.accessToken);
-
       const map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/aleguy02/cmc9btnei00e001s41wnfc10o',
