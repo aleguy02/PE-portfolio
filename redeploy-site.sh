@@ -1,6 +1,7 @@
 #!/bin/bash
 #
 # Written by : Alejandro Villate
+# Run this script from the root directory (i.e. one directory above PE-portfolio/)
 
 # Kill all existing tmux sessions
 tmux kill-server
