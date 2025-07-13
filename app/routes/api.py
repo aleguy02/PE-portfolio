@@ -2,7 +2,6 @@
 API routes to interact with MySQL database
 """
 
-import os, datetime
 from flask import Blueprint, request
 from playhouse.shortcuts import model_to_dict
 from app.models.timelinepost import TimelinePost
