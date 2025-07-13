@@ -24,6 +24,7 @@ if [ "$post" != "$top" ]; then
     echo "Error: The created post does not match the most recent post."
     echo "Created: $post"
     echo "Fetched: $top"
+    exit 1
 fi
 
 # CLEAN UP
