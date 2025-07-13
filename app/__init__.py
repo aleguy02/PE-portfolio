@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from app.routes.main import main_bp
+from app.routes.api import api_bp
 
 
 def create_app(test_config=None):
@@ -9,6 +10,7 @@ def create_app(test_config=None):
         app.config.from_mapping(test_config)
 
     app.register_blueprint(main_bp)
+    app.register_blueprint(api_bp)
 
     @app.errorhandler(404)
     def not_found(e):

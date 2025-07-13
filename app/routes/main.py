@@ -1,3 +1,7 @@
+"""
+Routes to serve main static pages
+"""
+
 from flask import Blueprint, render_template
 from app.config import get_config
 
