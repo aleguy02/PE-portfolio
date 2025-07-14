@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta property="og:title" content="Personal Portfolio" />
+    <meta property="og:description" content="My Personal Portfolio" />
+    <!-- <meta property="og:url" content="{{ url }}" /> -->
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link lang="sass" rel="stylesheet" href="./static/styles/main.css" />
+    <link rel="icon" href="./static/img/favicon.ico" type="image/x-icon" />
+    <title>{{ title }}</title>
+  </head>
+  <body>
+    {% include 'nav_header.html' %}
+
+    <!-- psuedo css for timeline-container. The goal is that form-container should take up the left half of the time-line container and posts-container should take up the right half -->
+    <!-- display: flex;
+justify-content: center;
+align-items: flex-start;
+flex: 1 0 0;
+align-self: stretch; -->
+    <div id="timeline-container">
+      <div id="form-container">
+        <h2>Share Something</h2>
+        <form action="{{ url_for('api.post_timeline_post') }}" method="POST" id="timeline-form">
+          <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required maxlength="20" placeholder="Your name" />
+          </div>
+          <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required maxlength="50" placeholder="your.email@example.com" />
+          </div>
+          <div>
+            <label for="content">Share your thoughts:</label>
+            <textarea id="content" name="content" rows="4" required maxlength="300" placeholder="What's on your mind? (max 50 words)" oninput="if(this.value.split(/\s+/).filter(Boolean).length > 50) this.value = this.value.split(/\s+/).slice(0,50).join(' ');"></textarea>
+          </div>
+          <button type="submit">Share Post</button>
+        </form>
+      </div>
+      
+      <div id="posts-container">
+        <h2 class="posts-header">Timeline Posts</h2>
+        {% if posts and posts|length > 0 %}
+          {% for post in posts %}
+          <div class="post">
+            <div class="post-header">
+              <h6>{{ post.name }}</h6>
+              <span class="post-date">{{ post.created_at }}</span>
+            </div>
+            <p>{{ post.content }}</p>
+          </div>
+          {% endfor %}
+        {% else %}
+          <div class="empty-state">
+            <h3>No posts yet</h3>
+            <p>Be the first to share your story!</p>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <script>
+      document.getElementById('timeline-form').addEventListener('submit', function(e) {
+        e.preventDefault(); // Prevent default form submission
+        
+        const submitButton = this.querySelector('button[type="submit"]');
+        const originalText = submitButton.textContent;
+        
+        // Get form fields
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const content = document.getElementById('content').value.trim();
+        
+        console.log(name, email, content)
+        
+        // Check if any field is empty or just whitespace
+        if (!name || !email || !content) {
+          alert('Please fill in all fields with valid content (not just spaces).');
+          return; // Stop form submission
+        }
+        
+        // Additional validation: Check if content has actual words (not just spaces)
+        if (content.split(/\s+/).filter(Boolean).length === 0) {
+          alert('Please enter some actual content in your message.');
+          contentField.focus();
+          return;
+        }
+        
+        // Add loading state
+        submitButton.textContent = 'Sharing...';
+        submitButton.disabled = true;
+        
+        // Create FormData with trimmed values
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('email', email);
+        formData.append('content', content);
+        
+        fetch(this.action, {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          window.location.reload(); 
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('Error posting your message. Please try again.');
+        })
+        .finally(() => {
+          submitButton.textContent = originalText;
+          submitButton.disabled = false;
+        });
+      });
+
+      // Auto-resize textarea
+      const textarea = document.getElementById('content');
+      textarea.addEventListener('input', function() {
+        this.style.height = 'auto';
+        this.style.height = this.scrollHeight + 'px';
+      });
+
+      // Add smooth scroll to new posts (if needed)
+      const postsContainer = document.getElementById('posts-container');
+      if (postsContainer && postsContainer.children.length > 1) {
+        postsContainer.scrollTop = 0; // Scroll to top to see newest posts
+      }
+    </script>
+  </body>
+</html>

@@ -2,7 +2,8 @@
 Routes to serve main static pages
 """
 
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, url_for
+import requests
 from app.config import get_config
 
 main_bp: Blueprint = Blueprint("main", __name__)
@@ -29,3 +30,14 @@ def hobbies():
     Returns hobbies page
     """
     return render_template("hobbies.html", title="Hobbies", hobbies=config.hobbies_data)
+
+
+@main_bp.route("/timeline")
+def timeline():
+    """
+    Returns timeline page
+    """
+    r = requests.get(url_for("api.get_timeline_post", _external=True))
+    data = r.json()
+    print(data)
+    return render_template("timeline.html", posts=data["timeline_posts"])
