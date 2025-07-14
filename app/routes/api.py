@@ -14,9 +14,9 @@ def post_timeline_post():
     """
     Create element in TABLE timelinepost
     """
-    name = request.form["name"]
-    email = request.form["email"]
-    content = request.form["content"]
+    name = request.form["name"].strip()
+    email = request.form["email"].strip()
+    content = request.form["content"].strip()
     timeline_post = TimelinePost.create(name=name, email=email, content=content)
 
     return model_to_dict(timeline_post)
