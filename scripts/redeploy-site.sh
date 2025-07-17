@@ -1,15 +1,39 @@
 #!/bin/bash
-#
-# Written by : Alejandro Villate
-# Run this script from one directory above PE-portfolio/
 
-set -eu
+set -eo pipefail
 
-# Pull in latest changes
-cd PE-portfolio
+PROJECT_DIR="$HOME/PE-portfolio/"
+VENV_DIR="python3-virtualenv"
+URL="http://alejandrovillate.duckdns.org:5000/"
+SERVICE="myportfolio"
+
+
+echo "=== pulling in latest changes ==="
+
+cd $PROJECT_DIR
 git fetch && git reset origin/main --hard
-source python3-virtualenv/bin/activate && pip install -r requirements.txt
+source $VENV_DIR/bin/activate && pip install -r requirements.txt
 
-# restart app service
+
+echo "=== restarting service ==="
+
 systemctl daemon-reload
-systemctl restart myportfolio
+systemctl restart $SERVICE
+
+
+echo "=== validating service ==="
+
+if [ -z "$(systemctl status $SERVICE | grep "active (running)")" ]; then
+        echo "!! service not running !!"
+        exit 1
+fi
+
+if [ "$(curl --head $URL | awk '/^HTTP/{print $2}')" != "200" ]; then
+        echo "Could not reach the site at $URL or received a non-200 HTTP response."
+        exit 1
+fi
+
+
+echo "=== redeployment complete ==="
+
+echo "View the site at $URL"

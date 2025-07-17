@@ -1,6 +1,6 @@
 #!/bin/bash
-#
-# Written by : Alejandro Villate
+
+# TODO: set up test environment instead of testing prod server to avoid race conditions
 
 set -euo pipefail  # shoutout to Isaac from Splunk for this tip
 
