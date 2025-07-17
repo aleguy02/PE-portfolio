@@ -17,6 +17,19 @@ def post_timeline_post():
     name = request.form["name"].strip()
     email = request.form["email"].strip()
     content = request.form["content"].strip()
+
+    # Check for duplicate name/email mapping
+    existing_with_email = TimelinePost.select().where(TimelinePost.email == email)
+    existing_with_name = TimelinePost.select().where(TimelinePost.name == name)
+
+    for post in existing_with_email:
+        if post.name != name:
+            return {"error": "Email already associated with a different name"}, 400
+
+    for post in existing_with_name:
+        if post.email != email:
+            return {"error": "Name already associated with a different email"}, 400
+
     timeline_post = TimelinePost.create(name=name, email=email, content=content)
 
     return model_to_dict(timeline_post)
@@ -25,12 +38,14 @@ def post_timeline_post():
 @api_bp.route("/api/timeline_post", methods=["GET"])
 def get_timeline_post():
     """
-    Fetch all elements in TABLE timelinepost
+    Fetch the 50 most recent elements in TABLE timelinepost
     """
     return {
         "timeline_posts": [
             model_to_dict(p)
-            for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())
+            for p in TimelinePost.select()
+            .order_by(TimelinePost.created_at.desc())
+            .limit(50)
         ]
     }
 
