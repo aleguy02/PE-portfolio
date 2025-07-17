@@ -56,7 +56,10 @@ align-self: stretch; -->
           {% for post in posts %}
           <div class="post">
             <div class="post-header">
-              <h6>{{ post.name }}</h6>
+              <div class="post-author">
+                <h6>{{ post.name }}</h6>
+                <span class="post-email">{{ post.email }}</span>
+              </div>
               <span class="post-date">{{ post.created_at }}</span>
             </div>
             <p>{{ post.content }}</p>
@@ -78,17 +81,15 @@ align-self: stretch; -->
         const submitButton = this.querySelector('button[type="submit"]');
         const originalText = submitButton.textContent;
         
-        // Get form fields
         const name = document.getElementById('name').value.trim();
         const email = document.getElementById('email').value.trim();
         const content = document.getElementById('content').value.trim();
         
         console.log(name, email, content)
         
-        // Check if any field is empty or just whitespace
         if (!name || !email || !content) {
           alert('Please fill in all fields with valid content (not just spaces).');
-          return; // Stop form submission
+          return;
         }
         
         // Additional validation: Check if content has actual words (not just spaces)
@@ -102,7 +103,6 @@ align-self: stretch; -->
         submitButton.textContent = 'Sharing...';
         submitButton.disabled = true;
         
-        // Create FormData with trimmed values
         const formData = new FormData();
         formData.append('name', name);
         formData.append('email', email);

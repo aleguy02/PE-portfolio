@@ -17,17 +17,15 @@ def post_timeline_post():
     name = request.form["name"].strip()
     email = request.form["email"].strip()
     content = request.form["content"].strip()
-    
+
     # Check for duplicate name/email mapping
     existing_with_email = TimelinePost.select().where(TimelinePost.email == email)
     existing_with_name = TimelinePost.select().where(TimelinePost.name == name)
-    
-    # If email exists with different name, reject
+
     for post in existing_with_email:
         if post.name != name:
             return {"error": "Email already associated with a different name"}, 400
-    
-    # If name exists with different email, reject  
+
     for post in existing_with_name:
         if post.email != email:
             return {"error": "Name already associated with a different email"}, 400
@@ -45,7 +43,9 @@ def get_timeline_post():
     return {
         "timeline_posts": [
             model_to_dict(p)
-            for p in TimelinePost.select().order_by(TimelinePost.created_at.desc()).limit(50)
+            for p in TimelinePost.select()
+            .order_by(TimelinePost.created_at.desc())
+            .limit(50)
         ]
     }
 
