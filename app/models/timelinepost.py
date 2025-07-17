@@ -28,6 +28,12 @@ class TimelinePost(Model):  # A model is a representation or view of a table
         database = mydb  # Specifies which database this model will use.
 
 
-mydb.connect()
-# this command is idempotent, we can run it as many times as we want but only one table will be created
-mydb.create_tables([TimelinePost])
+def init_db():
+    """Initialize database connection and create tables"""
+    try:
+        mydb.connect()
+        # this command is idempotent, we can run it as many times as we want but only one table will be created
+        mydb.create_tables([TimelinePost])
+    except Exception as e:
+        print(f"Database initialization error: {e}")
+        # In testing or development without MySQL, we can continue without database connection
