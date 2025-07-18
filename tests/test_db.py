@@ -34,7 +34,7 @@ class TestTimelinePost(unittest.TestCase):
             name='Jane Doe', email="jane@example.com", content='Hello world, I\'m Jane!.')
         assert second_post.id == 2
 
-        # Fetch the lastet post
+        # Fetch the latest post
         lastest_post = TimelinePost.select().order_by(
             TimelinePost.created_at.desc()).get()
 
