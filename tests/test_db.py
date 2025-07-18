@@ -9,8 +9,6 @@ from app.models.timelinepost import TimelinePost
 MODELS = [TimelinePost]
 
 test_db = SqliteDatabase(':memory:')
-print(f"Using database: {test_db.database} for testing")
-print(f"Database path: {MODELS[0]._meta.database.database}")
 
 
 class TestTimelinePost(unittest.TestCase):
@@ -35,9 +33,9 @@ class TestTimelinePost(unittest.TestCase):
         assert second_post.id == 2
 
         # Fetch the latest post
-        lastest_post = TimelinePost.select().order_by(
+        latest_post = TimelinePost.select().order_by(
             TimelinePost.created_at.desc()).get()
 
-        self.assertEqual(lastest_post.name, 'Jane Doe')
-        self.assertEqual(lastest_post.email, 'jane@example.com')
-        self.assertEqual(lastest_post.content, 'Hello world, I\'m Jane!.')
+        self.assertEqual(latest_post.name, 'Jane Doe')
+        self.assertEqual(latest_post.email, 'jane@example.com')
+        self.assertEqual(latest_post.content, 'Hello world, I\'m Jane!.')
