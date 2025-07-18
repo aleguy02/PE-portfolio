@@ -62,7 +62,7 @@ class AppTestCase(unittest.TestCase):
         assert json["email"] == "smith@gmail.com"
         assert json["content"] == "This is a test post 2."
 
-        #  Test the timeline page rendering
+        # Test the timeline page rendering
 
         get_data = self.client.get(endpoint)
         assert get_data.status_code == 200
