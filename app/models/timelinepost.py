@@ -33,7 +33,8 @@ def init_db():
     Initialize database connection and create tables
     """
     try:
-        mydb.connect()
+        if mydb.is_closed():
+            mydb.connect()
 
         # this command is idempotent, we can run it as many times as we want but only one table will be created
         mydb.create_tables([TimelinePost])
