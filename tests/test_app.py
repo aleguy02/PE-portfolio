@@ -35,13 +35,13 @@ class AppTestCase(unittest.TestCase):
 
     def test_timeline(self):
         # Test the timeline page rendering
-        endpoint = "api/timeline_post"
+        endpoint = "/api/timeline_post"
         response = self.client.get(endpoint)
         assert response.status_code == 200
         assert response.is_json
         json = response.get_json()
         assert "timeline_posts" in json
-        assert len(json["timeline_posts"]) >= 0
+        assert len(json["timeline_posts"]) == 0
 
         # Test posting a new timeline post
 
