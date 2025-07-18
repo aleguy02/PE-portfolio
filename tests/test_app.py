@@ -6,13 +6,13 @@ from peewee import SqliteDatabase
 import unittest
 import os
 
-os.environ['TESTING'] = 'true'
 TEST_DB = SqliteDatabase(':memory:')
 MODELS = [TimelinePost]
 
 
 class AppTestCase(unittest.TestCase):
     def setUp(self):
+        os.environ['TESTING'] = 'true'
         TEST_DB.bind(MODELS, bind_refs=False, bind_backrefs=False)
         TEST_DB.connect()
         TEST_DB.create_tables(MODELS)
@@ -26,17 +26,11 @@ class AppTestCase(unittest.TestCase):
         response = self.client.get('/')
         assert response.status_code == 200
         html = response.get_data(as_text=True)
-        # Check title
         assert "<title>Alejandro Villate</title>" in html
-        # Check main heading
         assert "<h1>Alejandro Villate</h1>" in html
-        # Check for profile section
         assert '<div class="profile">' in html
-        # Check for bio text
         assert " I\'m a Computer Science major at the University of Florida" in html
-        # Check for profile
         assert '<div class="profile">' in html
-        # Check for map
         assert '<div id="map"></div>' in html
 
     def test_timeline(self):
