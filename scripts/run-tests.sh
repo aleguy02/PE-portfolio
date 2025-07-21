@@ -1,23 +1,37 @@
 #bin/bash
+# This project uses the "coverage" module to run tests and measure code coverage. Read more at https://coverage.readthedocs.io/en/7.9.2/
 
 set -eu
 
 PROJECT_DIR=$PWD
-echo $PROJECT_DIR
 VENV_DIR="python3-virtualenv"
 
 
 echo "=== setting up testing environment==="
 
 source $VENV_DIR/bin/activate && pip install -r requirements.txt
-export PYTHONPATH=":/"
 
 
 echo "=== running unittest tests==="
 
-$PROJECT_DIR/$VENV_DIR/bin/python -m unittest discover -v tests/
+coverage run -m unittest discover -v tests/
+echo "~~ unittest coverage ~~"
+unittest_coverage=$(coverage report)
+echo "$unittest_coverage"
 
 
 echo "=== running pytest tests==="
 
-pytest
+coverage run -m pytest
+echo "~~ pytest coverage ~~"
+pytest_coverage=$(coverage report)
+echo "$pytest_coverage"
+
+
+echo "=== coverage recap ==="
+
+echo "unittest coverage:"
+echo "$unittest_coverage" | awk 'END{print $4}'
+
+echo "pytest coverage:"
+echo "$pytest_coverage" | awk 'END{print $4}'
