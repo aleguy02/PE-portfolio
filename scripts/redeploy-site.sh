@@ -1,4 +1,5 @@
 #!/bin/bash
+# Set up a virtual environment "python3-virtualenv" before executing this script
 
 set -eo pipefail
 
