@@ -1,4 +1,6 @@
-# test_db.py
+"""
+Tests for MySQL database interactions
+"""
 
 import unittest
 from peewee import *
@@ -8,7 +10,7 @@ from app.models.timelinepost import TimelinePost
 
 MODELS = [TimelinePost]
 
-test_db = SqliteDatabase(':memory:')
+test_db = SqliteDatabase(":memory:")
 
 
 class TestTimelinePost(unittest.TestCase):
@@ -26,16 +28,19 @@ class TestTimelinePost(unittest.TestCase):
     def test_timeline_post(self):
 
         first_post = TimelinePost.create(
-            name='John Doe', email="john@example.com", content='Hello world, I\'m John!')
+            name="John Doe", email="john@example.com", content="Hello world, I'm John!"
+        )
         assert first_post.id == 1
         second_post = TimelinePost.create(
-            name='Jane Doe', email="jane@example.com", content='Hello world, I\'m Jane!.')
+            name="Jane Doe", email="jane@example.com", content="Hello world, I'm Jane!."
+        )
         assert second_post.id == 2
 
         # Fetch the latest post
-        latest_post = TimelinePost.select().order_by(
-            TimelinePost.created_at.desc()).get()
+        latest_post = (
+            TimelinePost.select().order_by(TimelinePost.created_at.desc()).get()
+        )
 
-        self.assertEqual(latest_post.name, 'Jane Doe')
-        self.assertEqual(latest_post.email, 'jane@example.com')
-        self.assertEqual(latest_post.content, 'Hello world, I\'m Jane!.')
+        self.assertEqual(latest_post.name, "Jane Doe")
+        self.assertEqual(latest_post.email, "jane@example.com")
+        self.assertEqual(latest_post.content, "Hello world, I'm Jane!.")

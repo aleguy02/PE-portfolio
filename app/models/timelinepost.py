@@ -5,13 +5,15 @@ from peewee import *
 
 if os.getenv("TESTING") == "true":
     print("Running in testing mode")
-    mydb = SqliteDatabase('file:memory:?mode=memory&cache=shared', uri=True)
+    mydb = SqliteDatabase("file:memory:?mode=memory&cache=shared", uri=True)
 else:
-    mydb = MySQLDatabase(os.getenv("MYSQL_DATABASE"),
-                         user=os.getenv("MYSQL_USER"),
-                         password=os.getenv("MYSQL_PASSWORD"),
-                         host=os.getenv("MYSQL_HOST"),
-                         port=3306)
+    mydb = MySQLDatabase(
+        os.getenv("MYSQL_DATABASE"),
+        user=os.getenv("MYSQL_USER"),
+        password=os.getenv("MYSQL_PASSWORD"),
+        host=os.getenv("MYSQL_HOST"),
+        port=3306,
+    )
 
 
 # This uses Peewee, an ORM (Object Relational Mapper) for Python, which allows you to interact with databases using Python classes instead of SQL queries.
