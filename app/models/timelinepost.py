@@ -1,13 +1,17 @@
-import os, datetime
+import os
+import datetime
 from peewee import *
 
-mydb = MySQLDatabase(
-    os.getenv("MYSQL_DATABASE"),
-    user=os.getenv("MYSQL_USER"),
-    password=os.getenv("MYSQL_PASSWORD"),
-    host=os.getenv("MYSQL_HOST"),
-    port=3306,
-)
+
+if os.getenv("TESTING") == "true":
+    print("Running in testing mode")
+    mydb = SqliteDatabase('file:memory:?mode=memory&cache=shared', uri=True)
+else:
+    mydb = MySQLDatabase(os.getenv("MYSQL_DATABASE"),
+                         user=os.getenv("MYSQL_USER"),
+                         password=os.getenv("MYSQL_PASSWORD"),
+                         host=os.getenv("MYSQL_HOST"),
+                         port=3306)
 
 
 # This uses Peewee, an ORM (Object Relational Mapper) for Python, which allows you to interact with databases using Python classes instead of SQL queries.
@@ -29,7 +33,8 @@ def init_db():
     Initialize database connection and create tables
     """
     try:
-        mydb.connect()
+        if mydb.is_closed():
+            mydb.connect()
 
         # this command is idempotent, we can run it as many times as we want but only one table will be created
         mydb.create_tables([TimelinePost])
