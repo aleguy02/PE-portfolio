@@ -9,6 +9,9 @@ VENV_DIR="python3-virtualenv"
 
 echo "=== setting up testing environment==="
 
+if [ ! -d "$VENV_DIR" ]; then
+    python -m venv "$VENV_DIR"
+fi
 source $VENV_DIR/bin/activate && pip install -r requirements.txt
 
 
