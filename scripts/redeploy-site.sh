@@ -13,8 +13,8 @@ MAX_RETRIES=5
 echo "=== pulling in latest changes ==="
 
 cd $PROJECT_DIR
-git fetch && git reset origin/main --hard
-source $VENV_DIR/bin/activate && pip install -r requirements.txt
+git fetch && git reset origin/main --hard > /dev/null
+source $VENV_DIR/bin/activate && pip install -r requirements.txt > /dev/null
 
 
 echo "=== restarting service ==="

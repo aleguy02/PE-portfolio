@@ -39,5 +39,4 @@ def timeline():
     """
     r = requests.get(url_for("api.get_timeline_post", _external=True))
     data = r.json()
-    print(data)
     return render_template("timeline.html", posts=data["timeline_posts"])

@@ -1,0 +1,41 @@
+# Python virtual environments
+.venv
+python3-virtualenv
+venv/
+env/
+
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.pyc
+*.pyo
+*.pyd
+
+# Environment files
+.env
+
+# Database files
+flask.sqlite
+*.db
+*.sqlite
+*.sqlite3
+
+# Git
+.git
+.gitignore
+
+# Docker
+.dockerignore
+Dockerfile
+compose.yaml
+
+# Documentation
+README.md
+*.md
+
+# Testing
+.coverage
+.pytest_cache/
+htmlcov/
