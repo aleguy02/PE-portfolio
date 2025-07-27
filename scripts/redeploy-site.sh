@@ -28,7 +28,9 @@ docker compose -f compose.prod.yaml up -d --build > /dev/null
 
 echo "=== validating service ==="
 
-expected_containers='myportfolio
+expected_containers='nginx
+running
+myportfolio
 running
 mysql
 running'
