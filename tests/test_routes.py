@@ -26,3 +26,14 @@ def test_home(client):
     assert '<div class="profile">' in html
     assert '<div id="map"></div>' in html
     assert headers["Content-Type"] == "text/html; charset=utf-8"
+
+
+def test_hobbies(client):
+    response = client.get("/hobbies")
+    assert response.status_code == 200
+
+    html = response.get_data(as_text=True)
+    headers = dict(response.headers)
+
+    assert '<section class="hobbies-section section">' in html
+    assert headers["Content-Type"] == "text/html; charset=utf-8"

@@ -16,13 +16,10 @@ else:
     )
 
 
-# This uses Peewee, an ORM (Object Relational Mapper) for Python, which allows you to interact with databases using Python classes instead of SQL queries.
 class TimelinePost(Model):
-    # Each attribute below represents a column in the database table.
-
-    name = CharField()  # CharField is used for short text strings.
-    email = CharField()  # Also a short text string.
-    content = TextField()  # TextField is used for longer text.
+    name = CharField()
+    email = CharField()
+    content = TextField()
     created_at = DateTimeField(default=datetime.datetime.now)
 
     class Meta:

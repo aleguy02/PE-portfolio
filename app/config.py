@@ -13,6 +13,9 @@ class Config:
     # Load environment variables
     URL = os.getenv("URL")
     MAPBOX_API_KEY = os.getenv("MAPBOX_API_KEY")
+    USE_HTTPS = (
+        os.getenv("USE_HTTPS", "False") == "True"
+    )  # USE_HTTPS defaults to False if nothing is provided or if the string is not exactly "True"
 
     # Load static data
     experience_path = os.path.join(os.path.dirname(__file__), "data", "experience.json")

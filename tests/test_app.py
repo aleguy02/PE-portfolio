@@ -3,10 +3,14 @@ Tests for API-specific routes
 """
 
 from app import app
-from app.models.timelinepost import TimelinePost
+from app.models.timelinepost import TimelinePost, mydb
 from peewee import SqliteDatabase
 import unittest
 import os
+
+# Close the global database if it's open
+if not mydb.is_closed():
+    mydb.close()
 
 TEST_DB = SqliteDatabase(":memory:")
 MODELS = [TimelinePost]
@@ -14,7 +18,6 @@ MODELS = [TimelinePost]
 
 class AppTestCase(unittest.TestCase):
     def setUp(self):
-        os.environ["TESTING"] = "true"
         TEST_DB.bind(MODELS, bind_refs=False, bind_backrefs=False)
         TEST_DB.connect()
         TEST_DB.create_tables(MODELS)

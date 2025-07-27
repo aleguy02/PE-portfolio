@@ -37,6 +37,8 @@ def timeline():
     """
     Returns timeline page
     """
-    r = requests.get(url_for("api.get_timeline_post", _external=True))
+    protocol = "https://" if config.USE_HTTPS else "http://"
+    endpoint = url_for("api.get_timeline_post")
+    r = requests.get(protocol + config.URL + endpoint)
     data = r.json()
     return render_template("timeline.html", posts=data["timeline_posts"])
