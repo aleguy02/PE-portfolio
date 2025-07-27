@@ -5,7 +5,7 @@ set -eo pipefail
 
 PROJECT_DIR="$HOME/PE-portfolio/"
 VENV_DIR="python3-virtualenv"
-URL="http://alejandrovillate.duckdns.org:5000/"
+URL="https://alejandrovillate.duckdns.org/"
 MAX_RETRIES=5
 
 
