@@ -9,10 +9,11 @@ VENV_DIR="python3-virtualenv"
 
 echo "=== setting up testing environment==="
 
+export TESTING="true"
 if [ ! -d "$VENV_DIR" ]; then
     python -m venv "$VENV_DIR"
 fi
-source $VENV_DIR/bin/activate && pip install -r requirements.txt
+source $VENV_DIR/bin/activate && pip install -r requirements.txt > /dev/null
 
 
 echo "=== running unittest tests==="
