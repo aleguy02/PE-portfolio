@@ -4,9 +4,31 @@ API routes to interact with MySQL database
 
 from flask import Blueprint, request
 from playhouse.shortcuts import model_to_dict
-from app.models.timelinepost import TimelinePost
+from app.models.timelinepost import TimelinePost, mydb
 
 api_bp: Blueprint = Blueprint("api", __name__)
+
+
+@api_bp.before_request
+def before_request():
+    if mydb.is_closed():
+        mydb.connect()
+
+
+@api_bp.after_request
+def after_request(response):
+    if not mydb.is_closed():
+        mydb.close()
+    return response
+
+
+@api_bp.teardown_request
+def teardown_request(exception):
+    """
+    Ensure database is closed even if an exception occurs
+    """
+    if not mydb.is_closed():
+        mydb.close()
 
 
 @api_bp.route("/api/timeline_post", methods=["POST"])
