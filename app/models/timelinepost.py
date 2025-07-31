@@ -23,20 +23,18 @@ class TimelinePost(Model):
     created_at = DateTimeField(default=datetime.datetime.now)
 
     class Meta:
-        # The Meta class is used to configure model-specific settings.
-        database = mydb  # Specifies which database this model will use.
+        database = mydb
 
 
 def init_db():
-    """
-    Initialize database connection and create tables
-    """
     try:
         if mydb.is_closed():
             mydb.connect()
-
-        # this command is idempotent, we can run it as many times as we want but only one table will be created
         mydb.create_tables([TimelinePost])
     except Exception as e:
         print(f"Database initialization error: {e}")
-        # In testing or development without MySQL, we can continue without database connection
+
+
+def close_db():
+    if not mydb.is_closed():
+        mydb.close()

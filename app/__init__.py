@@ -1,7 +1,8 @@
 from flask import Flask, render_template
 from app.routes.main import main_bp
 from app.routes.api import api_bp
-from app.models.timelinepost import init_db
+from app.models.timelinepost import init_db, close_db
+import atexit
 
 
 def create_app(test_config=None):
@@ -11,6 +12,7 @@ def create_app(test_config=None):
         app.config.from_mapping(test_config)
     else:
         init_db()
+        atexit.register(close_db)
 
     app.register_blueprint(main_bp)
     app.register_blueprint(api_bp)
