@@ -2,9 +2,9 @@
 
 ## Quickstart
 
-This site uses a microservice architecture to handle the backend and database (and reverse-proxy in production).  
-To run the application in development do `docker compose -f compose.yaml up -d` and to stop the application do `docker compose -f compose.yaml down -d`.  
-To run the application in a production-level network do `docker compose -f compose.prod.yaml up -d`. Hopefully you won't have to stop the application manually.  
+This site uses a microservice architecture to handle the backend and database (and reverse-proxy in production).
+To run the application in development do `docker compose -f compose.yaml up -d` and to stop the application do `docker compose -f compose.yaml down -d`.
+To run the application in a production-level network do `docker compose -f compose.prod.yaml up -d`. Hopefully you won't have to stop the application manually.
 
 ---
 

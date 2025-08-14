@@ -23,18 +23,18 @@
       </div>
     </div>
   </div>
-  
+
   <script>
     function toggleMobileMenu() {
       const mobileMenu = document.getElementById('mobileMenu');
       mobileMenu.classList.toggle('show');
     }
-    
+
     // Close mobile menu when clicking outside
     document.addEventListener('click', function(event) {
       const hamburgerMenu = document.querySelector('.hamburger-menu');
       const mobileMenu = document.getElementById('mobileMenu');
-      
+
       if (!hamburgerMenu.contains(event.target)) {
         mobileMenu.classList.remove('show');
       }

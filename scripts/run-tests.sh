@@ -26,7 +26,8 @@ echo "$unittest_coverage"
 
 echo "=== running pytest tests==="
 
-coverage run -m pytest
+# supress warnings caused by external libraries
+coverage run -m pytest --disable-warnings
 echo "~~ pytest coverage ~~"
 pytest_coverage=$(coverage report)
 echo "$pytest_coverage"

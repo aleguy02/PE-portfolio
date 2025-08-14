@@ -8,7 +8,7 @@ services:
       - .env
     depends_on:
       - mysql
-  
+
   mysql:
     container_name: mysql
     image: mariadb
@@ -17,7 +17,7 @@ services:
       - .env
     volumes:
       - mydatabase:/var/lib/mysql
-  
+
   nginx:
     container_name: nginx
     image: jonasal/nginx-certbot
@@ -32,7 +32,7 @@ services:
       - ./user_conf.d:/etc/nginx/user_conf.d
     depends_on:
       - myportfolio
-  
+
 volumes:
   mydatabase:
   nginx_secrets:
