@@ -175,7 +175,7 @@ body {
   font-size: 3rem;
   font-weight: 700;
   color: white;
-  /* margin-bottom: 0; */
+  margin-bottom: 0;
 }
 
 .profile img {
@@ -225,25 +225,14 @@ body {
   padding-left: 1.1rem;
   padding-right: 1.5rem;
 }
-.section > h2 {
+.section h2 {
   color: #1d539f;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.8rem;
 }
 
 ul {
   margin-top: 0.5rem;
   padding-left: 1.2rem;
-}
-
-/* MapGL */
-.map-section > p {
-  color: #666;
-  margin-top: 0;
-}
-#map {
-  width: 100%;
-  width: 400px;
-  height: 300px;
 }
 
 /* Button Styles */
@@ -517,6 +506,13 @@ ul {
   font-size: 0.95rem;
 }
 
+.centered-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Responsive Design */
 .responsive-lg {
   display: block;
@@ -527,9 +523,6 @@ ul {
 }
 
 @media screen and (max-width: 768px) {
-  #map {
-    display: none;
-  }
   .responsive-lg {
     display: none;
   }

@@ -20,13 +20,6 @@
     <link lang="sass" rel="stylesheet" href="./static/styles/main.css" />
     <link rel="icon" href="./static/img/favicon.ico" type="image/x-icon" />
     <title>{{ title }}</title>
-
-    <!-- Mapbox GL -->
-    <script src="https://api.mapbox.com/mapbox-gl-js/v3.12.0/mapbox-gl.js"></script>
-    <link
-      href="https://api.mapbox.com/mapbox-gl-js/v3.12.0/mapbox-gl.css"
-      rel="stylesheet"
-    />
   </head>
 
   <body>
@@ -39,84 +32,24 @@
       <h1>{{ title }}</h1>
       <div id="bio" class="responsive-lg">
         <h3>
-          Computer Science @ The University of Florida | PE Fellow @ Meta & MLH
+          Computer Science at The University of Florida | PE Fellow at Meta & MLH
         </h3>
       </div>
     </div>
 
     <!-- shoutout to this repository for inspiration https://github.com/jimmyMsh/PE-portfolio/blob/main/app/templates/index.html -->
     <div id="resume" class="resume-section section">
+      <div class="centered-container">
       <h2>Resume</h2>
-      <object class="centered" data="{{ url_for('static', filename='files/resume.pdf') }}" width="100%" height="500">
+      <object class="centered" data="{{ url_for('static', filename='files/resume.pdf') }}" width="65%" height="600vh">
       </object>
+      </div>
     </div>
-
-    <div class="map-section section">
-      <h2>Travel Map</h2>
-      <p class="responsive-lg">I've had the opportunity to visit all the cool places on this map!</p>
-      <p class="responsive-sm">View this page on a larger screen to see this map</p>
-      <div id="map"></div>
-    </div>
-    <script>
-      mapboxgl.accessToken = '{{ mapboxgl_pub }}';
-      const map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/aleguy02/cmc9btnei00e001s41wnfc10o',
-        projection: 'globe', // Display the map as a globe, since satellite-v9 defaults to Mercator
-        zoom: -5,
-        center: [30, 15],
-      });
-
-      map.addControl(new mapboxgl.NavigationControl());
-      map.scrollZoom.disable();
-
-      map.on('style.load', () => {
-        map.setFog({}); // Set the default atmosphere style
-      });
-
-      // The following values can be changed to control rotation speed:
-
-      // At low zooms, complete a revolution every two minutes.
-      const secondsPerRevolution = 240;
-      // Above zoom level 5, do not rotate.
-      const maxSpinZoom = 5;
-      // Rotate at intermediate speeds between zoom levels 3 and 5.
-      const slowSpinZoom = 3;
-
-      let userInteracting = false;
-      const spinEnabled = true;
-
-      function spinGlobe() {
-        const zoom = map.getZoom();
-        if (spinEnabled && !userInteracting && zoom < maxSpinZoom) {
-          let distancePerSecond = 360 / secondsPerRevolution;
-          if (zoom > slowSpinZoom) {
-            // Slow spinning at higher zooms
-            const zoomDif = (maxSpinZoom - zoom) / (maxSpinZoom - slowSpinZoom);
-            distancePerSecond *= zoomDif;
-          }
-          const center = map.getCenter();
-          center.lng -= distancePerSecond;
-          // Smoothly animate the map over one second.
-          // When this animation is complete, it calls a 'moveend' event.
-          map.easeTo({ center, duration: 1000, easing: (n) => n });
-        }
-      }
-
-      // Pause spinning on interaction
-      map.on('mousedown', () => {
-        userInteracting = true;
-      });
-      map.on('dragstart', () => {
-        userInteracting = true;
-      });
-
-      // When animation is complete, start spinning if there is no ongoing interaction
-      map.on('moveend', () => {
-        spinGlobe();
-      });
-
-      spinGlobe();
-    </script>
   </body>
+
+  <div class="section">
+    <div class="centered-container">
+      <img src="{{ url_for('static', filename='img/pixel-cat.webp') }}" alt="Animated GIF" />
+    </div>
+  </div>
 </html>

@@ -13,7 +13,6 @@ jobs:
     env:
       TESTING: true
       URL: ${{ vars.URL }}
-      MAPBOX_API_KEY:  ${{ secrets.MAPBOX_API_KEY }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
