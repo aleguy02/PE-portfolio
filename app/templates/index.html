@@ -17,6 +17,11 @@
       rel="stylesheet"
     />
 
+    <script
+      src="https://kit.fontawesome.com/81fe88e261.js"
+      crossorigin="anonymous"
+    ></script>
+
     <link lang="sass" rel="stylesheet" href="./static/styles/main.css" />
     <link rel="icon" href="./static/img/favicon.ico" type="image/x-icon" />
     <title>{{ title }}</title>
@@ -36,6 +41,22 @@
           MLH
         </h3>
       </div>
+      <div id="socials">
+        <a href="https://blog.alejandrovillate.com" class="link-nodecor">
+          <i class="fa-solid fa-blog"></i>
+        </a>
+
+        <a href="https://github.com/aleguy02" class="link-nodecor">
+          <i class="fa fa-github"></i>
+        </a>
+
+        <a
+          href="https://linkedin.com/in/alejandrovillate1"
+          class="link-nodecor"
+        >
+          <i class="fa-brands fa-md fa-linkedin"></i>
+        </a>
+      </div>
     </div>
 
     <!-- shoutout to this repository for inspiration https://github.com/jimmyMsh/PE-portfolio/blob/main/app/templates/index.html -->
@@ -51,23 +72,29 @@
         >
           <p>
             Your browser can’t display PDFs.
-            <a href="{{ url_for('static', filename='files/resume.pdf') }}" class="btn responsive-sm"
+            <a
+              href="{{ url_for('static', filename='files/resume.pdf') }}"
+              class="btn responsive-sm"
               >Download the resume</a
             >.
           </p>
         </object>
 
-       <a href="{{ url_for('static', filename='files/resume.pdf') }}" class="btn responsive-sm">View Resume</a>
+        <a
+          href="{{ url_for('static', filename='files/resume.pdf') }}"
+          class="btn responsive-sm"
+          >View Resume</a
+        >
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="centered-container">
+        <img
+          src="{{ url_for('static', filename='img/pixel-cat.webp') }}"
+          alt="Animated GIF"
+        />
       </div>
     </div>
   </body>
-
-  <div class="section">
-    <div class="centered-container">
-      <img
-        src="{{ url_for('static', filename='img/pixel-cat.webp') }}"
-        alt="Animated GIF"
-      />
-    </div>
-  </div>
 </html>
