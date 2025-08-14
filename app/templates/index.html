@@ -37,24 +37,24 @@
         <img src="./static/img/headshot.jpg" />
       </div>
       <h1>{{ title }}</h1>
-      <div id="bio">
-        <p>
-          I am a Computer Science major at the University of Florida who loves
-          writing code. In my free time, I love staying up to date on the latest
-          in tech and video games, taking care of my bonsai trees, using my art
-          skills (either by drawing or making UIs), and cooking new recipes.
-        </p>
+      <div id="bio" class="responsive-lg">
+        <h3>
+          Computer Science @ The University of Florida | PE Fellow @ Meta & MLH
+        </h3>
       </div>
     </div>
 
-    <div class="about-section">
-      {% include 'work_experience.html' %} {% include 'education.html' %}
+    <!-- shoutout to this repository for inspiration https://github.com/jimmyMsh/PE-portfolio/blob/main/app/templates/index.html -->
+    <div id="resume" class="resume-section section">
+      <h2>Resume</h2>
+      <object class="centered" data="{{ url_for('static', filename='files/resume.pdf') }}" width="100%" height="500">
+      </object>
     </div>
 
     <div class="map-section section">
       <h2>Travel Map</h2>
-      <p class="responsive-text-lg">I've had the opportunity to visit all the cool places on this map!</p>
-      <p class="responsive-text-sm">View this page on a larger screen to see this map</p>
+      <p class="responsive-lg">I've had the opportunity to visit all the cool places on this map!</p>
+      <p class="responsive-sm">View this page on a larger screen to see this map</p>
       <div id="map"></div>
     </div>
     <script>

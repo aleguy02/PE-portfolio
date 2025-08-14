@@ -17,11 +17,6 @@ class Config:
         os.getenv("USE_HTTPS", "False") == "True"
     )  # USE_HTTPS defaults to False if nothing is provided or if the string is not exactly "True"
 
-    # Load static data
-    experience_path = os.path.join(os.path.dirname(__file__), "data", "experience.json")
-    with open(experience_path, "r", encoding="utf-8") as f:
-        experience_data = json.load(f)
-
     @staticmethod
     def validate_env_vars():
         missing_vars = []
@@ -31,9 +26,6 @@ class Config:
 
         if not Config.URL:
             missing_vars.append("URL")
-
-        if not Config.experience_data:
-            missing_vars.append("experience_data")
 
         if missing_vars:
             raise ValueError(

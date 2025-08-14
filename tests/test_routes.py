@@ -22,7 +22,5 @@ def test_home(client):
     assert "<title>Alejandro Villate</title>" in html
     assert "<h1>Alejandro Villate</h1>" in html
     assert '<div class="profile">' in html
-    assert "Computer Science major at the University of Florida" in html
-    assert '<div class="profile">' in html
     assert '<div id="map"></div>' in html
     assert headers["Content-Type"] == "text/html; charset=utf-8"
