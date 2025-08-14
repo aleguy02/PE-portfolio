@@ -24,12 +24,6 @@
   <body>
     {% include 'nav_header.html' %}
 
-    <!-- psuedo css for timeline-container. The goal is that form-container should take up the left half of the time-line container and posts-container should take up the right half -->
-    <!-- display: flex;
-justify-content: center;
-align-items: flex-start;
-flex: 1 0 0;
-align-self: stretch; -->
     <div id="timeline-container">
       <div id="form-container">
         <h2>Share Something</h2>
@@ -46,7 +40,7 @@ align-self: stretch; -->
             <label for="content">Share your thoughts:</label>
             <textarea id="content" name="content" rows="4" required maxlength="300" placeholder="What's on your mind? (max 50 words)" oninput="if(this.value.split(/\s+/).filter(Boolean).length > 50) this.value = this.value.split(/\s+/).slice(0,50).join(' ');"></textarea>
           </div>
-          <button type="submit">Share Post</button>
+          <button class="btn wide" type="submit">Share Post</button>
         </form>
       </div>
 
@@ -56,7 +50,7 @@ align-self: stretch; -->
           {% for post in posts %}
           <div class="post">
             <div class="post-header">
-              <div class="post-author">
+              <div>
                 <h6>{{ post.name }}</h6>
                 <span class="post-email">{{ post.email }}</span>
               </div>

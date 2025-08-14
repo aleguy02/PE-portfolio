@@ -32,7 +32,8 @@
       <h1>{{ title }}</h1>
       <div id="bio" class="responsive-lg">
         <h3>
-          Computer Science at The University of Florida | PE Fellow at Meta & MLH
+          Computer Science at The University of Florida | PE Fellow at Meta &
+          MLH
         </h3>
       </div>
     </div>
@@ -40,16 +41,33 @@
     <!-- shoutout to this repository for inspiration https://github.com/jimmyMsh/PE-portfolio/blob/main/app/templates/index.html -->
     <div id="resume" class="resume-section section">
       <div class="centered-container">
-      <h2>Resume</h2>
-      <object class="centered" data="{{ url_for('static', filename='files/resume.pdf') }}" width="65%" height="600vh">
-      </object>
+        <h2>Resume</h2>
+        <object
+          class="centered responsive-lg"
+          type="application/pdf"
+          data="{{ url_for('static', filename='files/resume.pdf') }}"
+          width="65%"
+          height="600px"
+        >
+          <p>
+            Your browser can’t display PDFs.
+            <a href="{{ url_for('static', filename='files/resume.pdf') }}" class="btn responsive-sm"
+              >Download the resume</a
+            >.
+          </p>
+        </object>
+
+       <a href="{{ url_for('static', filename='files/resume.pdf') }}" class="btn responsive-sm">View Resume</a>
       </div>
     </div>
   </body>
 
   <div class="section">
     <div class="centered-container">
-      <img src="{{ url_for('static', filename='img/pixel-cat.webp') }}" alt="Animated GIF" />
+      <img
+        src="{{ url_for('static', filename='img/pixel-cat.webp') }}"
+        alt="Animated GIF"
+      />
     </div>
   </div>
 </html>
