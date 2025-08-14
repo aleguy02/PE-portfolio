@@ -16,10 +16,8 @@ def create_app(test_config=None):
         atexit.register(close_db)
 
     config = get_config()
-    app.config["MAPBOX_API_KEY"] = config.MAPBOX_API_KEY
     app.config["URL"] = config.URL
     app.config["USE_HTTPS"] = config.USE_HTTPS
-    app.config["EXPERIENCE_DATA"] = config.experience_data
 
     app.register_blueprint(main_bp)
     app.register_blueprint(api_bp)

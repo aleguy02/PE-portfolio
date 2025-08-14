@@ -175,6 +175,7 @@ body {
   font-size: 3rem;
   font-weight: 700;
   color: white;
+  margin-bottom: 0;
 }
 
 .profile img {
@@ -216,50 +217,31 @@ body {
   padding-right: 1rem;
 }
 
+#bio > h3 {
+  font-weight: 300;
+}
+
+#socials {
+  font-size: 36px;
+}
+
+.link-nodecor {
+  color: inherit;
+  text-decoration: none;
+}
+
 .section {
   padding-left: 1.1rem;
   padding-right: 1.5rem;
 }
-.section > h2 {
+.section h2 {
   color: #1d539f;
-  margin-bottom: 0.3rem;
-}
-
-/* Work Experience Styles */
-.experience-section {
-  margin-bottom: 3rem;
-}
-
-.position {
-  margin-bottom: 2rem;
-}
-
-.position-title {
-  font-size: 1.1rem;
-  font-weight: bold;
-}
-
-.position-meta {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.95rem;
-  color: #666;
+  margin-bottom: 0.8rem;
 }
 
 ul {
   margin-top: 0.5rem;
   padding-left: 1.2rem;
-}
-
-/* MapGL */
-.map-section > p {
-  color: #666;
-  margin-top: 0;
-}
-#map {
-  width: 100%;
-  width: 400px;
-  height: 300px;
 }
 
 /* Button Styles */
@@ -275,21 +257,21 @@ ul {
   cursor: pointer;
   text-decoration: none;
   display: inline-block;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .btn:hover {
-  background-color: #1d539f;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  color: white;
-  text-decoration: none;
+  background-color: #3c6db2;
 }
 
 .btn:active {
   transform: translateY(0);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.wide {
+  width: 100%;
 }
 
 /* Error page specific styles */
@@ -353,7 +335,6 @@ ul {
 }
 
 #timeline-form label {
-  display: block;
   margin-bottom: 0.5rem;
   font-weight: 500;
   color: #333;
@@ -387,33 +368,6 @@ ul {
   resize: vertical;
   min-height: 100px;
   max-height: 200px;
-}
-
-#timeline-form button[type='submit'] {
-  width: 100%;
-  background-color: #1c539f;
-  color: white;
-  border: none;
-  padding: 0.875rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 500;
-  font-family: 'Roboto', serif;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-top: 0.5rem;
-}
-
-#timeline-form button[type='submit']:hover {
-  background-color: #1d539f;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-#timeline-form button[type='submit']:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Posts Container Styles */
@@ -499,16 +453,10 @@ ul {
   border-bottom: 1px solid rgba(28, 83, 159, 0.1);
 }
 
-.post-author {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
 .post h6 {
   color: #1d539f;
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
 }
 
@@ -533,25 +481,27 @@ ul {
   font-size: 0.95rem;
 }
 
+.centered-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Responsive Design */
-.responsive-text-lg {
+.responsive-lg {
   display: block;
 }
-.responsive-text-sm {
+
+.responsive-sm {
   display: none;
 }
 
 @media screen and (max-width: 768px) {
-  #bio {
+  .responsive-lg {
     display: none;
   }
-  #map {
-    display: none;
-  }
-  .responsive-text-lg {
-    display: none;
-  }
-  .responsive-text-sm {
+  .responsive-sm {
     display: block;
   }
 
@@ -581,8 +531,9 @@ ul {
 
   #form-container,
   #posts-container {
-    /* max-width: 100%; */
-    width: auto;
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   #posts-container {
@@ -590,40 +541,9 @@ ul {
   }
 
   .post-header {
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
-  }
-
-  .post-author {
-    width: 100%;
-  }
-
-  .post h6 {
-    font-size: 1rem;
-  }
-
-  .post-email {
-    font-size: 0.75rem;
-  }
-
-  .post-date {
-    font-size: 0.8rem;
-    align-self: flex-end;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  /* Timeline specific mobile styles */
-  #form-container {
-    padding: 1.5rem;
-  }
-
-  #posts-container {
-    padding: 1rem;
-  }
-
-  .post {
-    padding: 1rem;
   }
 }

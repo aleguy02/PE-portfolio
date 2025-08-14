@@ -17,8 +17,6 @@ def index():
         "index.html",
         title="Alejandro Villate",
         url=current_app.config["URL"],
-        work_experience=current_app.config["EXPERIENCE_DATA"],
-        mapboxgl_pub=current_app.config["MAPBOX_API_KEY"],
     )
 
 
