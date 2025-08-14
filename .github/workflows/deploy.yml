@@ -6,7 +6,7 @@ on:
       - main
       - testing-github-actions
   workflow_dispatch:
-    
+
 jobs:
   deploy:
     name: "Deploy to VPS"

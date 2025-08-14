@@ -14,7 +14,7 @@ services:
       - .:/myportfolio
     depends_on:
       - mysql
-  
+
   mysql:
     container_name: mysql
     image: mariadb
@@ -23,6 +23,6 @@ services:
       - .env
     volumes:
       - mydatabase:/var/lib/mysql
-  
+
 volumes:
   mydatabase:
