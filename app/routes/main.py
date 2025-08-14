@@ -22,16 +22,6 @@ def index():
     )
 
 
-@main_bp.route("/hobbies")
-def hobbies():
-    """
-    Returns hobbies page
-    """
-    return render_template(
-        "hobbies.html", title="Hobbies", hobbies=current_app.config["HOBBIES_DATA"]
-    )
-
-
 @main_bp.route("/timeline")
 def timeline():
     """

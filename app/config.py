@@ -22,10 +22,6 @@ class Config:
     with open(experience_path, "r", encoding="utf-8") as f:
         experience_data = json.load(f)
 
-    hobbies_path = os.path.join(os.path.dirname(__file__), "data", "hobbies.json")
-    with open(hobbies_path, "r", encoding="utf-8") as f:
-        hobbies_data = json.load(f)
-
     @staticmethod
     def validate_env_vars():
         missing_vars = []
@@ -38,9 +34,6 @@ class Config:
 
         if not Config.experience_data:
             missing_vars.append("experience_data")
-
-        if not Config.hobbies_data:
-            missing_vars.append("hobbies_data")
 
         if missing_vars:
             raise ValueError(
