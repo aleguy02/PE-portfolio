@@ -37,11 +37,11 @@ def health():
     """
     Healthcheck endpoint for app, nginx, and mysql containers.
     """
-    status = {"app": True, "nginx": False, "mysql": False}
+    status = {"app": True, "nginx": True, "mysql": False}
     # Nginx check
     try:
         nginx_url = "http://nginx:80/"
-        r = requests.get(nginx_url, timeout=2)
+        r = requests.get(nginx_url, verify=False, timeout=2)
         status["nginx"] = r.status_code == 200
     except Exception:
         status["nginx"] = False
