@@ -5,7 +5,7 @@ set -eo pipefail
 
 PROJECT_DIR="$HOME/PE-portfolio/"
 VENV_DIR="python3-virtualenv"
-URL="https://alejandrovillate.duckdns.org/"
+URL="https://alejandrovillate.duckdns.org"
 MAX_RETRIES=5
 
 
@@ -28,22 +28,19 @@ docker compose -f compose.prod.yaml up -d --build > /dev/null
 
 echo "=== validating service ==="
 
-expected_containers='nginx
-running
-myportfolio
-running
-mysql
-running'
+required_containers=("nginx" "myportfolio" "mysql")
 
-if [ "$(docker ps --format 'json' | jq -r '.Names,.State')" != "$expected_containers" ]; then
-        echo "!! Unexpected container processes. !!"
-        exit 1
-fi
+for container in "${required_containers[@]}"; do
+        if ! docker ps --format '{{.Names}}' | grep -q "^${container}$"; then
+                echo "!! Required container '$container' is not running. !!"
+                exit 1
+        fi
+done
 
 # Health check with retries
 retry_count=0
 while [ $retry_count -lt $MAX_RETRIES ]; do
-        if [ "$(curl --head $URL | awk '/^HTTP/{print $2}')" = "200" ]; then
+        if [ "$(curl --head $URL/health | awk '/^HTTP/{print $2}')" = "200" ]; then
                 echo "Health check passed"
                 break
         fi
@@ -57,7 +54,7 @@ while [ $retry_count -lt $MAX_RETRIES ]; do
         fi
 done
 if [ $retry_count -eq $MAX_RETRIES ]; then
-        echo "!! Could not reach the site at $URL or received a non-200 HTTP response. !!"
+        echo "!! Could not reach the site at $URL/health or received a non-200 HTTP response. !!"
         exit 1
 fi
 

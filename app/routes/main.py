@@ -36,15 +36,11 @@ def timeline():
 def health():
     """
     Healthcheck endpoint for app, nginx, and mysql containers.
-    - App: this code runs if the app is up
-    - Nginx: make HTTP request to self via Nginx
-    - MySQL: try a simple DB query
     """
     status = {"app": True, "nginx": False, "mysql": False}
-    # Nginx check: request to self via Nginx (use service name in Docker, or localhost if exposed)
+    # Nginx check
     try:
-        # Use HTTP (not HTTPS) for local Docker healthcheck, unless you know HTTPS is required
-        nginx_url = "http://localhost/"
+        nginx_url = "http://nginx:80/"
         r = requests.get(nginx_url, timeout=2)
         status["nginx"] = r.status_code == 200
     except Exception:
