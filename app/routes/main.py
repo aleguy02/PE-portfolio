@@ -25,11 +25,21 @@ def timeline():
     """
     Returns timeline page
     """
-    protocol = "https://" if current_app.config["USE_HTTPS"] else "http://"
-    endpoint = url_for("api.get_timeline_post")
-    r = requests.get(protocol + current_app.config["URL"] + endpoint)
-    data = r.json()
-    return render_template("timeline.html", posts=data["timeline_posts"])
+    try:
+        protocol = "https://" if current_app.config["USE_HTTPS"] else "http://"
+        endpoint = url_for("api.get_timeline_post")
+        r = requests.get(protocol + current_app.config["URL"] + endpoint)
+        data = r.json()
+        return render_template("timeline.html", posts=data["timeline_posts"])
+    except Exception:
+        return (
+            render_template(
+                "404.html",
+                title="Alejandro Villate",
+                message="Something went wrong, please try again later.",
+            ),
+            500,
+        )
 
 
 @main_bp.route("/health")
