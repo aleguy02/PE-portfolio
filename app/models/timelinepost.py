@@ -1,6 +1,7 @@
 import os
 import datetime
 from peewee import *
+from flask import current_app
 
 
 if os.getenv("TESTING") == "true":
@@ -32,7 +33,7 @@ def init_db():
             mydb.connect()
         mydb.create_tables([TimelinePost])
     except Exception as e:
-        print(f"Database initialization error: {e}")
+        current_app.logger.error(f"Database initialization error: {e}")
 
 
 def close_db():

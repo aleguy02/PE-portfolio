@@ -24,7 +24,14 @@ def create_app(test_config=None):
 
     @app.errorhandler(404)
     def not_found(e):
-        return render_template("404.html", title="Alejandro Villate"), 404
+        return (
+            render_template(
+                "404.html",
+                title="Alejandro Villate",
+                message="There's nothing to see here",
+            ),
+            404,
+        )
 
     return app
 

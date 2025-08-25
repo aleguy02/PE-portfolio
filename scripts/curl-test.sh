@@ -4,7 +4,7 @@
 
 set -euo pipefail  # shoutout to Isaac from Splunk for this tip
 
-BASE_URL="http://alejandrovillate.duckdns.org:5000"
+BASE_URL="http://www.alejandrovillate.com"
 API_URL="$BASE_URL/api/timeline_post"
 POST_DATA="name=aname&email=e@mail.com&content=curl-test.sh"
 
