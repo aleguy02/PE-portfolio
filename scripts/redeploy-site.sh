@@ -13,7 +13,6 @@ echo "=== pulling in latest changes ==="
 
 cd $PROJECT_DIR
 git fetch && git reset origin/main --hard > /dev/null
-source $VENV_DIR/bin/activate && pip install -r requirements.txt > /dev/null
 
 
 echo "=== spinning down containers ==="
