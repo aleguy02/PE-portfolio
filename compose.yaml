@@ -13,7 +13,8 @@ services:
     volumes:
       - .:/myportfolio
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
 
   mysql:
     container_name: mysql
@@ -23,6 +24,12 @@ services:
       - .env
     volumes:
       - mydatabase:/var/lib/mysql
+    healthcheck:
+      test: mariadb-admin ping -h localhost --password=$MYSQL_ROOT_PASSWORD
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
 
 volumes:
   mydatabase:
