@@ -4,8 +4,7 @@
 set -eo pipefail
 
 PROJECT_DIR="$HOME/PE-portfolio/"
-VENV_DIR="python3-virtualenv"
-URL="https://alejandrovillate.com"
+URL="https://www.alejandrovillate.com"
 MAX_RETRIES=5
 
 
@@ -48,8 +47,8 @@ while [ $retry_count -lt $MAX_RETRIES ]; do
         echo "Health check attempt $retry_count/$MAX_RETRIES failed"
 
         if [ $retry_count -lt $MAX_RETRIES ]; then
-                echo "Retrying in 2 seconds..."
-                sleep 2
+                echo "Retrying in 7 seconds..."
+                sleep 7
         fi
 done
 if [ $retry_count -eq $MAX_RETRIES ]; then
