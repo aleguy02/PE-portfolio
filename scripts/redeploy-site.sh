@@ -1,29 +1,32 @@
 #!/bin/bash
+# Set up a virtual environment "python3-virtualenv" before executing this script
 
 set -eo pipefail
-
-echo "" > deploy.log
-exec > >(tee -a deploy.log) 2>&1
 
 PROJECT_DIR="$HOME/PE-portfolio/"
 URL="https://www.alejandrovillate.com"
 MAX_RETRIES=5
 
 
+echo "=== pulling in latest changes ==="
 
 cd $PROJECT_DIR
+git fetch && git reset origin/main --hard > /dev/null
 
-printf "=== spinning down containers ==="
-docker compose -f compose.prod.yaml down
 
-printf "\n=== pulling in latest changes ==="
-git fetch && git reset origin/main --hard
+echo "=== spinning down containers ==="
 
-printf "\n=== rebuilding containers ==="
-docker compose -f compose.prod.yaml up -d --build
+docker compose -f compose.prod.yaml down > /dev/null
 
-printf "\n=== validating service ==="
-required_containers=("myportfolio" "mysql")
+
+echo "=== rebuilding containers ==="
+
+docker compose -f compose.prod.yaml up -d --build > /dev/null
+
+
+echo "=== validating service ==="
+
+required_containers=("nginx" "myportfolio" "mysql")
 
 for container in "${required_containers[@]}"; do
         if ! docker ps --format '{{.Names}}' | grep -q "^${container}$"; then
@@ -33,27 +36,27 @@ for container in "${required_containers[@]}"; do
 done
 
 # Health check with retries
-# retry_count=0
-# while [ $retry_count -lt $MAX_RETRIES ]; do
-#         if [ "$(curl --head $URL/health | awk '/^HTTP/{print $2}')" = "200" ]; then
-#                 echo "Health check passed"
-#                 break
-#         fi
+retry_count=0
+while [ $retry_count -lt $MAX_RETRIES ]; do
+        if [ "$(curl --head $URL/health | awk '/^HTTP/{print $2}')" = "200" ]; then
+                echo "Health check passed"
+                break
+        fi
 
-#         retry_count=$((retry_count + 1))
-#         echo "Health check attempt $retry_count/$MAX_RETRIES failed"
+        retry_count=$((retry_count + 1))
+        echo "Health check attempt $retry_count/$MAX_RETRIES failed"
 
-#         if [ $retry_count -lt $MAX_RETRIES ]; then
-#                 echo "Retrying in 7 seconds..."
-#                 sleep 7
-#         fi
-# done
-# if [ $retry_count -eq $MAX_RETRIES ]; then
-#         echo "!! Could not reach the site at $URL/health or received a non-200 HTTP response. !!"
-#         exit 1
-# fi
+        if [ $retry_count -lt $MAX_RETRIES ]; then
+                echo "Retrying in 7 seconds..."
+                sleep 7
+        fi
+done
+if [ $retry_count -eq $MAX_RETRIES ]; then
+        echo "!! Could not reach the site at $URL/health or received a non-200 HTTP response. !!"
+        exit 1
+fi
 
 
-printf "\n=== redeployment complete ==="
+echo "=== redeployment complete ==="
 
 echo "View the site at $URL"
