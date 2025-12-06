@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   myportfolio:
     container_name: myportfolio
@@ -25,21 +25,21 @@ services:
       retries: 5
       start_period: 30s
 
-  # nginx:
-  #   container_name: nginx
-  #   image: jonasal/nginx-certbot
-  #   restart: always
-  #   environment:
-  #     - CERTBOT_EMAIL=darthaleguy@gmail.com
-  #   ports:
-  #     - 80:80
-  #     - 443:443
-  #   volumes:
-  #     - nginx_secrets:/etc/letsencrypt
-  #     - ./user_conf.d:/etc/nginx/user_conf.d
-  #   depends_on:
-  #     - myportfolio
+  nginx:
+    container_name: nginx
+    image: jonasal/nginx-certbot
+    restart: always
+    environment:
+      - CERTBOT_EMAIL=darthaleguy@gmail.com
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - nginx_secrets:/etc/letsencrypt
+      - ./user_conf.d:/etc/nginx/user_conf.d
+    depends_on:
+      - myportfolio
 
 volumes:
   mydatabase:
-  # nginx_secrets:
+  nginx_secrets:
