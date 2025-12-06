@@ -32,10 +32,11 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_IP: ${{ secrets.SSH_IP }}
 
-      - name: Copy redeploy script to VPS
-        run: |
-          scp -o StrictHostKeyChecking=no scripts/redeploy-site.sh my-vps:~/redeploy-site.sh \
-          ssh my-vps 'chmod +x ~/redeploy-site.sh'
+      - name: Copy redeploy script
+        run: scp -o StrictHostKeyChecking=no scripts/redeploy-site.sh my-vps:~/redeploy-site.sh
+
+      - name: Make script executable
+        run: ssh my-vps 'chmod +x ~/redeploy-site.sh'
 
       - name: Redeploy Site
         run: |
