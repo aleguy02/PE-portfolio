@@ -9,7 +9,7 @@ on:
 
 jobs:
   deploy:
-    name: "Deploy to VPS"
+    name: 'Deploy to VPS'
     runs-on: ubuntu-latest
     steps:
       - name: Configure SSH
@@ -28,6 +28,10 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_IP: ${{ secrets.SSH_IP }}
+
+      - name: Copy redeploy script to VPS
+        run: |
+          scp -o StrictHostKeyChecking=no scripts/redeploy-site.sh my-vps:~/redeploy-site.sh
 
       - name: Redeploy Site
         run: |
